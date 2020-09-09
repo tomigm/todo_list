@@ -1,8 +1,16 @@
+import  next  from './Mfunctions';
+  
+
+M.AutoInit();
 
 
 
+const helpBtn = document.getElementById('helpBtn');
+const nextHelpBtn = document.getElementById('nextHelp');
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, options);
-  });
+helpBtn.addEventListener('click', function() {next(0)});
+nextHelpBtn.addEventListener('click', function() {next(1)});
+
+console.log ('hola');
+
+ 

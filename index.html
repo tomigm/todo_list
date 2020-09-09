@@ -4,34 +4,35 @@
    <title>TO-DO LISTe</title>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" type="text/css" href="assets/styles/reset.css">
-   <link rel="stylesheet" type="text/css" href="assets/styles/style.css">
+   
 <!--Import Google Icon Font-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="assets/styles/materialize.css"  media="screen,projection"/>
-
+<link rel="stylesheet" type="text/css" href="assets/styles/style.css">
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body> 
     
-<div class="wrapper row">
+<div class="wrapper row ">
     
-   <section class="col s3">
-      <div class="project">
-    
-         <span class="name">Project name <span class="new badge" data-badge-caption="custom caption">4</span></a>
+   <section class="projectList col s3 collection teal lighten-2">
+      <div class="row project collection-item">
+         
          <i class="material-icons">delete</i>
-         <input type="checkbox" class="filled-in">
-
+         <apan class="name">Project name </span>
+         <span class="new badge" data-badge-caption="tasks">4</span>       
       </div>
 
-      <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 modal-trigger" href="#projectModal"><i class="material-icons">add</i></a>
+      
+      <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 modal-trigger" href="#projectModal" id="projectListBtn" ><i class="material-icons">add</i></a>
    </section>
 
-   <section class="col s9">
+   <section class="taskList col s9 teal ">
+      <a class="btn-floating btn-large waves-effect waves-light red lighten-2" id="helpBtn"  ><i class="material-icons">live_help</i></a>
 
-      <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2"><i class="material-icons">add</i></a>
+      <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2" id="taskListBtn"><i class="material-icons">add</i></a>
    </section>
 
    <div id="projectModal" class="modal">
@@ -46,19 +47,42 @@
        <div class="row">
          <div class="input-field col s12">
            <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
-           <label for="textarea2">Textarea</label>
+           <label for="textarea2">Project description</label>
          </div>
        </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Add project</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn indigo lighten-2">Add project</a>
       </div>
     </div>
+
+    <!--aaaaaa-->
+    <div class="tap-target" data-target="taskListBtn" >
+      <div class="tap-target-content">
+        <h5>Add task</h5>
+        <p>Click here for adding tasks!</p>
+        <div class="next" id ="nextHelp">Next</div>
+
+      </div>
+      <div class="tap-target-wave tap-target-origin" style="top: 360px; left: 360px; width: 80px; height: 80px;"> <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 taskListBtnM" id="taskListBtn"><i class="material-icons">add</i></a>
+      </div>
+    </div>
+            
+    <div class="tap-target" data-target="projectListBtn">
+      <div class="tap-target-content">
+        <h5>Add project</h5>
+        <p>Click here for adding projects!</p>
+      </div>
+       
+    </div>
+            
     
 </div>
   <!--JavaScript at end of body for optimized loading-->
-  <script type="text/javascript" src="/dist/materialize.js"></script>
+<script type="text/javascript" src="materialize.js"></script>
+
  <script src="main.js"></script>
+
 </body>
 </html>
 

@@ -1,5 +1,8 @@
 import  next  from './Mfunctions';
-  
+import projects from './projects';
+import tasks from './tasks';
+import projectForm from './projectsForm'
+import tasksForm from './tasksForm'
 
 M.AutoInit();
 
@@ -12,3 +15,4 @@ nextHelpBtn.addEventListener('click', function() {next(1)});
 
 /*FEATURE DISCOVERY BLOCK*/
  
+

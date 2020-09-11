@@ -12,7 +12,7 @@ const projectTemplate = (name, description, tasks) => {
     </div>
 
     `
-    document.getElementById('projects').appendChild(div);
+    return div;
 
 }
 

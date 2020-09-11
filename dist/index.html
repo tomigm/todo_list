@@ -17,11 +17,11 @@
     
 <div class="wrapper row ">
     
-   <section class="projectList col s3 collection teal lighten-2">
+   <section class="projectList col s3 collection  grey darken-4">
       <div class="row project collection-item">
          
-         <i class="material-icons">delete</i>
-         <apan class="name">Project name </span>
+         <a href ="#"><i class="material-icons" id="delProj">delete</i></a>
+         <span class="name">Project name </span>
          <span class="new badge" data-badge-caption="tasks">4</span>       
       </div>
 
@@ -29,25 +29,51 @@
       <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 modal-trigger" href="#projectModal" id="projectListBtn" ><i class="material-icons">add</i></a>
    </section>
 
-   <section class="taskList col s9 teal ">
+   <section class="taskList col s9">
+      
+      <div class="row task">
+         <div class="col s12">
+            <div class="card">
+               <div class="card-content">
+                  <span class="card-title name">Task Name</span>
+                  <p class="description">Task description with a bunch of text </p>
+                  <a class ="dueDate">Due date: 30/12/2020</a>
+                  <a class="priority">Low</a>
+                  <label>
+                     <input type="checkbox" class="filled-in" checked="checked">
+                     <span>Mark as done</span>
+                   </label>       
+               <div class="card-action">
+                  <a href="#">EDIT</a>
+                  <a href="#"><i class="material-icons">delete</i></a>
+               </div>
+               </div>
+            </div>
+         </div>      
+         
+
+      </div>
+
       <a class="btn-floating btn-large waves-effect waves-light red lighten-2" id="helpBtn"  ><i class="material-icons">live_help</i></a>
 
-      <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2" id="taskListBtn"><i class="material-icons">add</i></a>
+      <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 modal-trigger" href="#taskModal" id="taskListBtn"><i class="material-icons">add</i></a>
    </section>
+
+<!--modals-->
 
    <div id="projectModal" class="modal">
       <div class="modal-content">
         <h4>Add project</h4>
         <div class="row">
          <div class="input-field col s12">
-            <input placeholder="Placeholder" id="project_title" type="text" class="validate">
+            <input placeholder="Example: 'X client landing page'" id="project_title" type="text" class="validate">
             <label for="project_title">Project title</label>
          </div>
        </div>
        <div class="row">
          <div class="input-field col s12">
-           <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
-           <label for="textarea2">Project description</label>
+           <textarea id="projectDescription" class="materialize-textarea" data-length="120"></textarea>
+           <label for="projectDescription">Project description</label>
          </div>
        </div>
       </div>
@@ -56,7 +82,44 @@
       </div>
     </div>
 
-    <!--aaaaaa-->
+    <div id="taskModal" class="modal">
+      <div class="modal-content">
+        <h4>Add Task</h4>
+        <div class="row">
+         <div class="input-field col s12">
+            <input placeholder="Example: 'Code CSS'" id="task_title" type="text" class="validate">
+            <label for="task_title">Task Title</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s12">
+           <textarea id="taskDescription" class="materialize-textarea" data-length="120"></textarea>
+           <label for="taskDescription">Task description</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s12">
+            <input type="text" class="datepicker" id="dueDate">
+           <label for="dueDate">Due date</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s12">
+            <select>            
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+            </select>
+            <label>Task Priority</label>
+         </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn indigo lighten-2">Add task</a>
+      </div>
+    </div>
+
+    <!--tap targets-->
     <div class="tap-target" data-target="taskListBtn" >
       <div class="tap-target-content">
         <h5>Add task</h5>
@@ -64,7 +127,7 @@
         <div class="next" id ="nextHelp">Next</div>
 
       </div>
-      <div class="tap-target-wave tap-target-origin" style="top: 360px; left: 360px; width: 80px; height: 80px;"> <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 taskListBtnM" id="taskListBtn"><i class="material-icons">add</i></a>
+      <div class="tap-target-wave tap-target-origin" style="top: 360px; left: 360px; width: 80px; height: 80px;"> <a class="btn-floating btn-large waves-effect waves-light indigo lighten-2 taskListBtnM modal-trigger" href="#taskModal" id="taskListBtn"><i class="material-icons">add</i></a>
       </div>
     </div>
             

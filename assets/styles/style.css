@@ -27,6 +27,11 @@
     
 }
 
+#delProj {
+    color: teal;
+    cursor: pointer;
+}
+
 .projectList .project span.badge.new {
     right: 0;
 }
@@ -42,6 +47,37 @@
     left: 2em;
 }
 
+
+
+.taskList {
+    overflow: scroll;
+}
+
+
+    
+
+.taskList .card-content {
+    padding: 2em 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.taskList .card-content .card-action {
+    align-self: flex-end;
+    font-size: 1.3rem;
+}
+
+.taskList .card-content> p, a, label > span  {
+    font-size: 1.2rem;
+}
+
+.taskList .card-content>label > span  {
+    font-size: 1.2rem;
+}
+
+.taskList .card-content>* {
+    padding: 1em 0
+}
 
 
 #taskListBtn {
@@ -65,4 +101,25 @@
     height: 100%;
     margin-bottom: 0;
 
+}
+
+.tap-target-content > h5 {
+    font-family: Montserrat;
+    font-weight: 600;
+}
+
+.tap-target-content > p {
+    font-size: 1.2rem;
+    padding: 1em 0;
+    font-family: Work Sans;
+}
+
+.tap-target-content > .next  {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    font-family: Montserrat;
+    padding-top: 0.5em;
+    margin-left: auto;
 }

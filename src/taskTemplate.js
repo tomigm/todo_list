@@ -25,7 +25,7 @@ const taskTemplate = (name, description, dueDate, priority) => {
  
 
     `
-    document.getElementById('tasks').appendChild(div);
+    return div
 
 }
 

@@ -1,9 +1,19 @@
 import pubsub from './pubsub';
 import projectTemplate from './projectTemplate'
-/*
+
 const projects = (() => {
 let list = [];
+const listen = () => {pubsub.subscribe('projectAdded', render)}
 
+const render = data => {
+    list.push(data);
+    console.log (list);
+    let projects = document.getElementById('projects');
+    projects.append(projectTemplate(data[0], data[1], data[2].length));
+}
+
+return { listen, render }
+/*
 const render = (container) =>{
     container.appendChild(projectTemplate);
 
@@ -38,7 +48,7 @@ const projectAdded = (projectName, projectDescription, tasks) => {
 }
 
 return {render, deleteProject, projectAdded}
-
+*/
 })();
 
-*/
+export default projects;

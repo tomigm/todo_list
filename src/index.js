@@ -4,7 +4,7 @@ import tasks from './tasks';
 import projectsForm from './projectsForm'
 import tasksForm from './tasksForm'
 import projectTemplate from './projectTemplate';
-
+import pubsub from './pubsub'
 
 
 /*FEATURE DISCOVERY BLOCK*/
@@ -17,7 +17,6 @@ nextHelpBtn.addEventListener('click', function() {next(1)});
 /*FEATURE DISCOVERY BLOCK*/
  
 projectsForm.submit();
-
-
+projects.listen();
 
 M.AutoInit();

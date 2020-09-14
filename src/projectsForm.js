@@ -10,7 +10,8 @@ const projectsForm = (() => {
                 let projectDescription = document.getElementById('projectDescription').value;
                 let tasks = [];
                 console.log(`PROJECTS FORM: projectAdded '${projectName}': '${projectDescription}'`)
-                pubsub.publish('projectAdded', projectName, projectDescription, tasks)
+                pubsub.publish('projectAdded', [projectName, projectDescription, tasks])
+                
              })
         
     }

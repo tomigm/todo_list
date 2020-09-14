@@ -3,31 +3,43 @@ import projectTemplate from './projectTemplate'
 
 const projects = (() => {
 let list = [];
-const listen = () => {pubsub.subscribe('projectAdded', render)}
+const listen = () => {
+    
+    
+    pubsub.subscribe('projectAdded', render);
+}
 
 const render = data => {
     list.push(data);
-    console.log (list);
-
-    //let delProj = document.querySelectorAll('.delProj');
-    //delProj.addEventListener('click', deleteProject);
+    console.log (list);    
 
     let projects = document.getElementById('projects');
     projects.append(projectTemplate(data.projectName, data.projectDescription, data.tasks.length));
     pubsub.publish('updatedList', list);
+
+    let delProj = document.querySelectorAll('.delProj');
+    delProj.forEach(elem => elem.addEventListener('click', deleteProject))
 }
-/*
+
 const deleteProject = (event) => {
-    let current = event.target.closest('span.name');
-    let name = current.textContent;
+    const projectList = document.getElementById('projects')
+
+    let current = event.target.closest(".row");
+    let name = current.getAttribute('project-name')    
+
     list = list.filter(project => project.projectName !== name ) ;
     pubsub.publish('projectDeleted', list);
-    let parent = current.parentElement;
-    parent.parentElement.removeChild(parent);
-}
-*/
 
-return { listen, render, list }
+    projectList.removeChild(current);
+    console.log(list)  
+   /* ;
+    
+    let parent = current.parentElement;
+    parent.parentElement.removeChild(parent);*/
+}
+
+
+return { listen, render, list, deleteProject }
 /*
 const render = (container) =>{
     container.appendChild(projectTemplate);

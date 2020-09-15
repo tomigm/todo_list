@@ -18,5 +18,6 @@ nextHelpBtn.addEventListener('click', function() {next(1)});
  
 projectsForm.submit();
 projects.listen();
-
+tasksForm.submit();
+tasks.listen();
 M.AutoInit(); // 1 solucion es agregar esto al final de cada render

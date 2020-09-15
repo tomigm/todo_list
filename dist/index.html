@@ -88,8 +88,8 @@
         <h4>Add Task</h4>
         <div class="row">
          <div class="input-field col s12">
-            <input placeholder="Example: 'Code CSS'" id="task_title" type="text" class="validate">
-            <label for="task_title">Task Title</label>
+            <input placeholder="Example: 'Code CSS'" id="task_name" type="text" class="validate">
+            <label for="task_name">Task Title</label>
          </div>
        </div>
        <div class="row">
@@ -105,18 +105,18 @@
          </div>
        </div>
        <div class="row">
-         <div class="input-field col s12">
-            <select>            
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
+         <div class="input-field col s12" >
+            <select id="priority">            
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
             </select>
             <label>Task Priority</label>
          </div>
        </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn indigo lighten-2">Add task</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn indigo lighten-2" id ="addTaskBtn">Add task</a>
       </div>
     </div>
 

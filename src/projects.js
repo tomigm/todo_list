@@ -25,9 +25,10 @@ const render = data => {
 
     // adds an event listener to delete icon in each project (rendered) ==> runs deleteProject()
     let delProj = document.querySelectorAll('.delProj');
-    delProj.forEach(elem => elem.addEventListener('click', deleteProject))
+        delProj.forEach(elem => elem.addEventListener('click', deleteProject))
 
-  
+    let project = document.querySelectorAll('.project');
+        project.forEach(proj => proj.addEventListener('click', openTasks))
     
 }
 
@@ -46,6 +47,19 @@ const deleteProject = (event) => {
     projectList.removeChild(current);
     console.log(list)  
  
+}
+
+const openTasks = (event) => {
+    let current = event.target.closest(".row");
+    let name = current.getAttribute('project-name');
+    console.log(name);   
+    let currentTasks = list.find(project => (project.projectName === name))
+    
+
+    pubsub.publish('taskOpened', currentTasks)
+    console.log (currentTasks.tasks)
+                    
+    
 }
 
 

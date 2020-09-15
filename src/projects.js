@@ -2,14 +2,19 @@ import pubsub from './pubsub';
 import projectTemplate from './projectTemplate'
 
 const projects = (() => {
+
+    // Creates empty projects list
 let list = [];
+    // Makes projects to start listening
 const listen = () => {
     
-    
+    // it suscribes to 'projectAdded' tyhat comes from projectForm.js // executes render()
     pubsub.subscribe('projectAdded', render);
 }
 
 const render = data => {
+    // pushes info from 'projectAdded' pubsub to project list if it doesn't exist yet.
+    if (list.find(project => (project.projectName === data.projectName))) {return alert('Project exists')};
     list.push(data);
     console.log (list);    
 
@@ -19,6 +24,7 @@ const render = data => {
 
     let delProj = document.querySelectorAll('.delProj');
     delProj.forEach(elem => elem.addEventListener('click', deleteProject))
+    
 }
 
 const deleteProject = (event) => {
@@ -39,7 +45,7 @@ const deleteProject = (event) => {
 }
 
 
-return { listen, render, list, deleteProject }
+return { listen, render, list, deleteProject,  }
 /*
 const render = (container) =>{
     container.appendChild(projectTemplate);

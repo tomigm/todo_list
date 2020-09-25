@@ -6,12 +6,12 @@ const tasks = (() => {
 let list = [];
 const listen = () => {    
     pubsub.subscribe('taskOpened', renderCurrent);
-    
+    pubsub.subscribe('taskAdded', add);
 }
 
 const clearTasks = (tasks) => {
-    // check if booklist has childs
-     //if yes > while booklist have child, remove child
+    // check if taskList has childs
+     //if yes > while taskList have childs, remove childs
    if(tasks.hasChildNodes()) {
      
      while (tasks.hasChildNodes()) {
@@ -27,10 +27,7 @@ const render = (data) => {
     
     console.log('instancia render');
 
-    let tasks = document.getElementById('tasks');
-    
-
-    
+    let tasks = document.getElementById('tasks');   
     
     tasks.append(taskTemplate(data.taskName, data.taskDescription, data.dueDate, data.priority));
 
@@ -44,10 +41,11 @@ const render = (data) => {
 const renderCurrent = (data) => {
     //console.log('test');
     console.log(data.tasks);
-
+    // grabs tasks from selected project
     let taskList = data.tasks;
-    if (taskList.length == 0) {render()}
+    // Clears tasks from task module    
     clearTasks(document.getElementById('tasks'));
+    // for each task inside .tasks, it renders to the DOM
     taskList.forEach(task => render(task));
     
     //pubsub.subscribe('taskAdded', add);

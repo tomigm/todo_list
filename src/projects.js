@@ -57,6 +57,13 @@ const deleteProject = (event) => {
 }
 
 const openTasks = (event) => {
+    let toggleActive = event.target.closest(".collection-item");
+    let active = document.querySelectorAll(".collection-item");
+
+    active.forEach(activeElement => activeElement.classList.remove("active"))
+    
+    toggleActive.classList.add("active")
+
     let current = event.target.closest(".row");
     
     let name = current.getAttribute('project-name');

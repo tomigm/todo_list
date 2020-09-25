@@ -6,7 +6,7 @@ const tasks = (() => {
 let list = [];
 const listen = () => {    
     pubsub.subscribe('taskOpened', renderCurrent);
-    
+    pubsub.subscribe('taskAdded', add);
 }
 
 const clearTasks = (tasks) => {
@@ -45,17 +45,19 @@ const renderCurrent = (data) => {
     // grabs tasks from selected project
     let taskList = data.tasks;
     // update taskList with selected project tasks
+    list = [];
     list = taskList;
     // Clears tasks from task module    
     clearTasks(document.getElementById('tasks'));
     // for each task inside .tasks, it renders to the DOM
     taskList.forEach(task => render(task));
 
-    pubsub.subscribe('taskAdded', add);
     //pubsub.subscribe('taskAdded', add);
 }
 
 const add = data => {
+        
+
     // pushes info from 'taskAdded' pubsub to project list if it doesn't exist yet.
         if (list.find(task => (task.taskName === data.taskName))) {return alert('task exists')};
         

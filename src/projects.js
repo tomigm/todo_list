@@ -9,27 +9,34 @@ let list = [];
 const listen = () => {
     
     // it suscribes to 'projectAdded' tyhat comes from projectForm.js // executes render()
-    pubsub.subscribe('projectAdded', render);
+    pubsub.subscribe('projectAdded', add);
 }
 
-const render = data => {
-    // pushes info from 'projectAdded' pubsub to project list if it doesn't exist yet.
-    if (list.find(project => (project.projectName === data.projectName))) {return alert('Project exists')};
-    list.push(data);
-    console.log (list);    
+
+
+const render = data => {       
 
     // renders current project data on Projectlist
     let projects = document.getElementById('projects');
-    projects.append(projectTemplate(data.projectName, data.projectDescription, data.tasks.length));
-    pubsub.publish('updatedList', list);
+    projects.append(projectTemplate(data.projectName, data.projectDescription, data.tasks.length));    
 
     // adds an event listener to delete icon in each project (rendered) ==> runs deleteProject()
     let delProj = document.querySelectorAll('.delProj');
         delProj.forEach(elem => elem.addEventListener('click', deleteProject))
 
-    let project = document.querySelectorAll('.project');
+ let project = document.querySelectorAll('.project');
         project.forEach(proj => proj.addEventListener('click', openTasks))
     
+}
+
+const add = data => {
+// pushes info from 'projectAdded' pubsub to project list if it doesn't exist yet.
+    if (list.find(project => (project.projectName === data.projectName))) {return alert('Project exists')};
+    list.push(data);
+    console.log (list); 
+    pubsub.publish('updatedList', list);
+
+    render(data);
 }
 
 const deleteProject = (event) => {
@@ -51,19 +58,20 @@ const deleteProject = (event) => {
 
 const openTasks = (event) => {
     let current = event.target.closest(".row");
+    
     let name = current.getAttribute('project-name');
-    console.log(name);   
+    //console.log(name);   
     let currentTasks = list.find(project => (project.projectName === name))
     
 
     pubsub.publish('taskOpened', currentTasks)
-    console.log (currentTasks.tasks)
+    //console.log (currentTasks.tasks)
                     
     
 }
 
 
-return { listen, render, list, deleteProject,  }
+return { listen, render, list, deleteProject }
 
 })();
 

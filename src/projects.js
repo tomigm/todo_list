@@ -10,6 +10,7 @@ const listen = () => {
     
     // it suscribes to 'projectAdded' tyhat comes from projectForm.js // executes render()
     pubsub.subscribe('projectAdded', add);
+    pubsub.subscribe('updatedTaskList', updateCounter)
 }
 
 
@@ -77,8 +78,14 @@ const openTasks = (event) => {
     
 }
 
+const updateCounter = (data) => {
+    let active = document.querySelector(".active > span.badge");
+    
+    active.innerHTML = `${data.length}`;
+}
 
-return { listen, render, list, deleteProject }
+
+return { listen, render, list, deleteProject, updateCounter }
 
 })();
 

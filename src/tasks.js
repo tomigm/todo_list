@@ -30,10 +30,14 @@ const render = (data) => {
     
     taskList.append(taskTemplate(data.taskName, data.taskDescription, data.dueDate, data.priority));
 
-    
 
     let delTask = document.querySelectorAll('.delTask');
     delTask.forEach(elem => elem.addEventListener('click', deleteTask))
+
+    let edTask = document.querySelectorAll('.editTask');
+    edTask.forEach(elem => elem.addEventListener('click', editTask))
+
+   
 
 }
 
@@ -65,6 +69,7 @@ const add = data => {
 
         pubsub.publish('updatedTaskList', list);
 
+        
         return render(data);
 }
 
@@ -83,6 +88,20 @@ const deleteTask = (event) => {
     // removes parent from DOM
     taskList.removeChild(current);
     console.log(list)  
+}
+
+const editTask = (event) => {
+    console.log('edit');
+        /* //! ABRE EL MODAL || HAY QUE VER SI UPDATEA EL CONTENIDO ANTES DE QUE LO ABRA MATERIALIZE, SINO USAR ESTO
+        var elem = document.getElementById('editTaskModal');
+        var instance = M.Modal.init(elem);
+        instance.open();
+        */
+    let current = event.target.closest(".row");
+    let name = current.getAttribute('task-name');
+    let currentElement= list.filter(task => task.taskName === name);
+    //*const editTaskModal = document.getElementById('editTaskModal')
+    console.log(currentElement)
 }
 
 return { listen, render, list, deleteTask,  }

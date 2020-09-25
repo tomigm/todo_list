@@ -18,7 +18,7 @@ const taskTemplate = (name, description, dueDate, priority) => {
                 <span>Mark as done</span>
               </label>       
           <div class="card-action">
-             <a href="#" id='editTask'>EDIT</a>
+             <a class='editTask modal-trigger' href="#editTaskModal">EDIT</a>
              <a href="#"><i class="material-icons delTask">delete</i></a>
           </div>
           </div>

@@ -5,6 +5,8 @@ const projects = (() => {
 
     // Creates empty projects list
 let list = [];
+ // Selects project list
+const projectList = document.getElementById('projects')
     // Makes projects to start listening
 const listen = () => {
     
@@ -17,9 +19,7 @@ const listen = () => {
 
 const render = data => {       
 
-    // renders current project data on Projectlist
-    let projects = document.getElementById('projects');
-    projects.append(projectTemplate(data.projectName, data.projectDescription, data.tasks.length));    
+    projectList.append(projectTemplate(data.projectName, data.projectDescription, data.tasks.length));    
 
     // adds an event listener to delete icon in each project (rendered) ==> runs deleteProject()
     let delProj = document.querySelectorAll('.delProj');
@@ -41,9 +41,7 @@ const add = data => {
 }
 
 const deleteProject = (event) => {
-
-    // Selects project list
-    const projectList = document.getElementById('projects')
+   
     // Grabs parent from clicked delete icon ==> it gets its project-name data
     let current = event.target.closest(".row");
     let name = current.getAttribute('project-name')    

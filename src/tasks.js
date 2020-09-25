@@ -4,6 +4,7 @@ import taskTemplate from './taskTemplate'
 
 const tasks = (() => {
 let list = [];
+const taskList = document.getElementById('tasks');   
 const listen = () => {    
     pubsub.subscribe('taskOpened', renderCurrent);
     pubsub.subscribe('taskAdded', add);
@@ -25,17 +26,15 @@ const clearTasks = (tasks) => {
 
 const render = (data) => {
     
-    console.log('instancia render');
-
-    let tasks = document.getElementById('tasks');   
+    console.log('instancia render');    
     
-    tasks.append(taskTemplate(data.taskName, data.taskDescription, data.dueDate, data.priority));
+    taskList.append(taskTemplate(data.taskName, data.taskDescription, data.dueDate, data.priority));
 
     
-/*
+
     let delTask = document.querySelectorAll('.delTask');
-    delProj.forEach(elem => elem.addEventListener('click', deleteTask))
-*/
+    delTask.forEach(elem => elem.addEventListener('click', deleteTask))
+
 }
 
 const renderCurrent = (data) => {
@@ -43,14 +42,14 @@ const renderCurrent = (data) => {
     //console.log('test');
     console.log(data);
     // grabs tasks from selected project
-    let taskList = data.tasks;
+    let currentTaskList = data.tasks;
     // update taskList with selected project tasks
     list = [];
-    list = taskList;
+    list = currentTaskList;
     // Clears tasks from task module    
-    clearTasks(document.getElementById('tasks'));
+    clearTasks(taskList);
     // for each task inside .tasks, it renders to the DOM
-    taskList.forEach(task => render(task));
+    currentTaskList.forEach(task => render(task));
 
     //pubsub.subscribe('taskAdded', add);
 }
@@ -69,8 +68,21 @@ const add = data => {
         return render(data);
 }
 
-const deleteTask = () => {
+
+
+const deleteTask = (event) => {
     console.log('deleted')
+
+    // Grabs parent from clicked delete icon ==> it gets its project-name data
+    let current = event.target.closest(".row");
+    let name = current.getAttribute('task-name')    
+    //makes a new list with all the projects EXCEPT the one clicked that matches projectName
+    list = list.filter(task => task.taskName !== name ) ;
+    // publishes globally the new updated list without the deleted project
+    pubsub.publish('updatedTaskList', list);
+    // removes parent from DOM
+    taskList.removeChild(current);
+    console.log(list)  
 }
 
 return { listen, render, list, deleteTask,  }

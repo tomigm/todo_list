@@ -1,6 +1,8 @@
 const taskTemplate = (name, description, dueDate, priority) => {
     let div = document.createElement('div');
     div.setAttribute('class', 'row');
+    div.setAttribute('task-name', `${name}`);
+
     div.innerHTML = `
     
    
@@ -17,7 +19,7 @@ const taskTemplate = (name, description, dueDate, priority) => {
               </label>       
           <div class="card-action">
              <a href="#" id='editTask'>EDIT</a>
-             <a href="#" id='delTask'><i class="material-icons">delete</i></a>
+             <a href="#"><i class="material-icons delTask">delete</i></a>
           </div>
           </div>
        </div>

@@ -120,6 +120,46 @@
         <a href="#!" class="modal-close waves-effect waves-green btn indigo lighten-2" id ="addTaskBtn">Add task</a>
       </div>
     </div>
+    
+<!--EDIT TASK MODAL-->
+
+    <div id="editTaskModal" class="modal">
+      <div class="modal-content">
+        <h4>Edit Task</h4>
+        <div class="row">
+         <div class="input-field col s12">
+            <input placeholder="Example: 'Code CSS'" id="current_task_name" type="text" class="validate">
+            <label for="current_task_name">Task Title</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s12">
+           <textarea id="currentTaskDescription" class="materialize-textarea" data-length="120"></textarea>
+           <label for="currentTaskDescription">Task description</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s12">
+            <input type="text" class="datepicker" id="currentDueDate">
+           <label for="currentDueDate">Due date</label>
+         </div>
+       </div>
+       <div class="row">
+         <div class="input-field col s12" >
+            <select id="currentPriority">            
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+            </select>
+            <label>Task Priority</label>
+         </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn indigo lighten-2" id ="editTaskBtn">Save changes</a>
+      </div>
+    </div>
+
 
     <!--tap targets-->
     <div class="tap-target" data-target="taskListBtn" >

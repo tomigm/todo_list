@@ -6,7 +6,7 @@ const tasks = (() => {
 let list = [];
 const listen = () => {    
     pubsub.subscribe('taskOpened', renderCurrent);
-    pubsub.subscribe('taskAdded', add);
+    
 }
 
 const clearTasks = (tasks) => {
@@ -31,7 +31,7 @@ const render = (data) => {
     
     tasks.append(taskTemplate(data.taskName, data.taskDescription, data.dueDate, data.priority));
 
-    pubsub.publish('updatedTaskList', list);
+    
 /*
     let delTask = document.querySelectorAll('.delTask');
     delProj.forEach(elem => elem.addEventListener('click', deleteTask))
@@ -39,26 +39,32 @@ const render = (data) => {
 }
 
 const renderCurrent = (data) => {
+    
     //console.log('test');
-    console.log(data.tasks);
+    console.log(data);
     // grabs tasks from selected project
     let taskList = data.tasks;
+    // update taskList with selected project tasks
+    list = taskList;
     // Clears tasks from task module    
     clearTasks(document.getElementById('tasks'));
     // for each task inside .tasks, it renders to the DOM
     taskList.forEach(task => render(task));
-    
+
+    pubsub.subscribe('taskAdded', add);
     //pubsub.subscribe('taskAdded', add);
 }
 
 const add = data => {
-    // pushes info from 'projectAdded' pubsub to project list if it doesn't exist yet.
+    // pushes info from 'taskAdded' pubsub to project list if it doesn't exist yet.
         if (list.find(task => (task.taskName === data.taskName))) {return alert('task exists')};
+        
         list.push(data);
-        console.log (list); 
-        pubsub.publish('updatedTaskList', list.length);
+        console.log (`this is the current list: ${list}`); 
 
-        render(data);
+        pubsub.publish('updatedTaskList', list);
+
+        return render(data);
 }
 
 const deleteTask = () => {

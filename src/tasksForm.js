@@ -14,7 +14,7 @@ const tasksForm = (() => {
                 let priority = document.getElementById('priority').value
                 
                 console.log(`TASKS FORM: projectAdded '${taskName}': '${taskDescription}'`)
-                // Publishes to pubsub to make it global, its used in projects.js
+                // Publishes to pubsub to make it global, its used in tasks.js
                 pubsub.publish('taskAdded', {taskName:taskName, taskDescription:taskDescription, dueDate:dueDate, priority:priority })
                 
              })

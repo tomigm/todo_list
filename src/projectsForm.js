@@ -13,10 +13,15 @@ const projectsForm = (() => {
                 console.log(`PROJECTS FORM: projectAdded '${projectName}': '${projectDescription}'`)
                 // Publishes to pubsub to make it global, its used in projects.js
                 pubsub.publish('projectAdded', {projectName:projectName, projectDescription:projectDescription, tasks:tasks})
-                
+                document.getElementById('project_title').value = '';
+                document.getElementById('rojectDescription').value = '';
              })
+             
+             
         
     }
+
+
 
     
     

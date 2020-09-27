@@ -16,6 +16,12 @@ const tasksForm = (() => {
                 console.log(`TASKS FORM: projectAdded '${taskName}': '${taskDescription}'`)
                 // Publishes to pubsub to make it global, its used in tasks.js
                 pubsub.publish('taskAdded', {taskName:taskName, taskDescription:taskDescription, dueDate:dueDate, priority:priority })
+
+                // RESET FORM VALUES 
+                document.getElementById('task_name').value = '';
+                document.getElementById('taskDescription').value = '';
+                document.getElementById('dueDate').value = '';
+                document.getElementById('priority').value = '';
                 
              })
         

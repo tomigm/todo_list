@@ -3,6 +3,7 @@ import projects from './projects';
 import tasks from './tasks';
 import projectsForm from './projectsForm'
 import tasksForm from './tasksForm'
+import editTaskForm from './editTaskForm'
 import projectTemplate from './projectTemplate';
 import pubsub from './pubsub'
 
@@ -20,5 +21,7 @@ projectsForm.submit();
 projects.listen();
 tasksForm.submit();
 tasks.listen();
+editTaskForm.listen();
+
 M.AutoInit(); // 1 solucion es agregar esto al final de cada render
 

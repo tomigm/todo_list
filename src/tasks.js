@@ -8,6 +8,7 @@ const taskList = document.getElementById('tasks');
 const listen = () => {    
     pubsub.subscribe('taskOpened', renderCurrent);
     pubsub.subscribe('taskAdded', add);
+    pubsub.subscribe('taskUpdated', editTask);
 }
 
 const clearTasks = (tasks) => {
@@ -30,15 +31,12 @@ const render = (data) => {
     
     taskList.append(taskTemplate(data.taskName, data.taskDescription, data.dueDate, data.priority));
 
+    
+    let delTask = taskList.lastElementChild.querySelector('.delTask');
+    delTask.addEventListener('click', deleteTask);
 
-    let delTask = document.querySelectorAll('.delTask');
-    delTask.forEach(elem => elem.addEventListener('click', deleteTask))
-
-    let edTask = document.querySelectorAll('.editTask');
-    edTask.forEach(elem => elem.addEventListener('click', editTask))
-
-   
-
+    let edTask = taskList.lastElementChild.querySelector('.editTask');
+    edTask.addEventListener('click', listenEdit);
 }
 
 const renderCurrent = (data) => {
@@ -59,25 +57,19 @@ const renderCurrent = (data) => {
 }
 
 const add = data => {
-        
-
     // pushes info from 'taskAdded' pubsub to project list if it doesn't exist yet.
         if (list.find(task => (task.taskName === data.taskName))) {return alert('task exists')};
-        
+    // pushes new task info to list    
         list.push(data);
         console.log (`this is the current list: ${list}`); 
-
+    // makes list public
         pubsub.publish('updatedTaskList', list);
-
-        
+    //renders to DOM        
         return render(data);
 }
 
-
-
 const deleteTask = (event) => {
-    console.log('deleted')
-
+    console.log('deleted');
     // Grabs parent from clicked delete icon ==> it gets its project-name data
     let current = event.target.closest(".row");
     let name = current.getAttribute('task-name')    
@@ -86,25 +78,45 @@ const deleteTask = (event) => {
     // publishes globally the new updated list without the deleted project
     pubsub.publish('updatedTaskList', list);
     // removes parent from DOM
+    console.log(current)
     taskList.removeChild(current);
     console.log(list)  
 }
 
-const editTask = (event) => {
+const listenEdit = (event) => {
     console.log('edit');
-        /* //! ABRE EL MODAL || HAY QUE VER SI UPDATEA EL CONTENIDO ANTES DE QUE LO ABRA MATERIALIZE, SINO USAR ESTO
-        var elem = document.getElementById('editTaskModal');
-        var instance = M.Modal.init(elem);
-        instance.open();
-        */
+   //! ABRE EL MODAL || HAY QUE VER SI UPDATEA EL CONTENIDO ANTES DE QUE LO ABRA MATERIALIZE, SINO USAR ESTO
+        /*
+    var elem = document.getElementById('editTaskModal');
+    var instance = M.Modal.init(elem);
+    instance.open();
+*/
+    // Get current DOM element
     let current = event.target.closest(".row");
     let name = current.getAttribute('task-name');
-    let currentElement= list.filter(task => task.taskName === name);
-    //*const editTaskModal = document.getElementById('editTaskModal')
-    console.log(currentElement)
+    // filters element from list
+    let currentElement = list.filter(task => task.taskName === name); 
+    console.log('before edit:' + currentElement[0]);
+    //*const editTaskModal = document.getElementById('editTaskModal');
+    // makes selected element array from "list" public >> being listened by editTaskForm.js
+    pubsub.publish('currentTaskValues', currentElement[0]);
+    // makes a new list without the edited element && removes from DOM
+    list = list.filter(task => task.taskName !== name ); 
+    taskList.removeChild(current);
 }
 
-return { listen, render, list, deleteTask,  }
+// NewValues are data that are fired from editTaskForm >> previously fired by 'currentTaskValues' pubsub
+
+const editTask  = (newValues) =>  {           
+    list.push(newValues)     
+    pubsub.publish('updatedTaskList', list);  
+    render (newValues);
+
+}
+
+
+
+return { listen, render, list, deleteTask}
 
 })();
 

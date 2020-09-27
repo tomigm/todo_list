@@ -4,6 +4,11 @@ import projectTemplate from './projectTemplate'
 const projects = (() => {
     // Creates empty projects list
     let list = [];
+    
+    const getList = () => {
+        console.log(list);
+    }
+    
     // Selects project list
     const projectList = document.getElementById('projects')
         // Makes projects to start listening
@@ -12,7 +17,7 @@ const projects = (() => {
         pubsub.subscribe('projectAdded', add);
         pubsub.subscribe('updatedTaskList', updateCounter) 
     }
-
+    
     const render = data => {       
         projectList.append(projectTemplate(data.projectName, data.projectDescription, data.tasks.length));    
         // adds an event listener to delete icon in each project (rendered) ==> runs deleteProject()
@@ -33,7 +38,9 @@ const projects = (() => {
         list.push(data);
         console.log (list); 
         pubsub.publish('updatedList', list);
+        
         render(data);
+        
     }
 
     const deleteProject = (event) => { 
@@ -69,9 +76,10 @@ const projects = (() => {
     const updateCounter = (data) => {
         let active = document.querySelector(".active > span.badge");   
             active.innerHTML = `${data.length}`;
+            pubsub.publish('updatedList', list);
     }
 
-    return { listen, render, list, deleteProject, updateCounter }
+    return { listen, render, list, deleteProject, updateCounter, getList }
 
 })();
 

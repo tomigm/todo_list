@@ -5,9 +5,7 @@ import projectsForm from './projectsForm'
 import tasksForm from './tasksForm'
 import editTaskForm from './editTaskForm'
 import intro from './introductionProjects'
-
-
-
+import getData from './localStorage'
 
 /*FEATURE DISCOVERY BLOCK*/
 
@@ -24,5 +22,10 @@ tasksForm.submit();
 tasks.listen();
 editTaskForm.listen();
 intro.init();
+
+
+//setInterval(projects.getList, 5000);
+getData.listen();
 M.AutoInit(); // 1 solucion es agregar esto al final de cada render
 
+//TODO AGREGAR LOCALSTORAGE

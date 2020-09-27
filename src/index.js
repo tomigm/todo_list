@@ -4,8 +4,9 @@ import tasks from './tasks';
 import projectsForm from './projectsForm'
 import tasksForm from './tasksForm'
 import editTaskForm from './editTaskForm'
-import projectTemplate from './projectTemplate';
-import pubsub from './pubsub'
+import intro from './introductionProjects'
+
+
 
 
 /*FEATURE DISCOVERY BLOCK*/
@@ -22,6 +23,6 @@ projects.listen();
 tasksForm.submit();
 tasks.listen();
 editTaskForm.listen();
-
+intro.init();
 M.AutoInit(); // 1 solucion es agregar esto al final de cada render
 

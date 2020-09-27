@@ -13,6 +13,7 @@ const listen = () => {
     // it suscribes to 'projectAdded' tyhat comes from projectForm.js // executes render()
     pubsub.subscribe('projectAdded', add);
     pubsub.subscribe('updatedTaskList', updateCounter)
+    
 }
 
 
@@ -27,12 +28,18 @@ const render = data => {
 
  let project = document.querySelectorAll('.project');
         project.forEach(proj => proj.addEventListener('click', openTasks))
-    
+
+       
+        
+            var elems = projectList.querySelectorAll('.tooltipped');
+            M.Tooltip.init(elems);
+          
 }
 
 const add = data => {
 // pushes info from 'projectAdded' pubsub to project list if it doesn't exist yet.
     if (list.find(project => (project.projectName === data.projectName))) {return alert('Project exists')};
+    if (data.projectName == '') {return alert('Assign a name to the project')}
     list.push(data);
     console.log (list); 
     pubsub.publish('updatedList', list);
@@ -51,6 +58,9 @@ const deleteProject = (event) => {
     pubsub.publish('projectDeleted', list);
     // removes parent from DOM
     projectList.removeChild(current);
+    let elem = current.querySelector('.tooltipped');
+        let instance = M.Tooltip.init(elem)
+        instance.destroy()
     console.log(list)  
  
 }

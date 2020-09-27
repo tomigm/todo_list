@@ -4,7 +4,7 @@ const projectTemplate = (name, description, tasks) => {
     div.setAttribute('project-name', `${name}`);
     div.innerHTML = `
     
-    <div class="col s12 project collection-item tooltipped" data-position="right" data-tooltip="${description}">
+    <div class="col s12 project collection-item tooltipped" data-position="right" data-tooltip='${description}'>
           
           <i class="material-icons delProj">delete</i>
           <span class="name">${name}</span>

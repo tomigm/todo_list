@@ -13,11 +13,9 @@ const projectTemplate = (name, description, tasks) => {
     </div>
 
     `
-
     
     return div;
     
-
 }
 
 export default projectTemplate

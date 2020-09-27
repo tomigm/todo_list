@@ -3,8 +3,7 @@ const taskTemplate = (name, description, dueDate, priority) => {
     div.setAttribute('class', 'row');
     div.setAttribute('task-name', `${name}`);
 
-    div.innerHTML = `
-    
+    div.innerHTML = `    
    
     <div class="col s12">
        <div class="card">
@@ -23,12 +22,10 @@ const taskTemplate = (name, description, dueDate, priority) => {
           </div>
           </div>
        </div>
-    </div> 
- 
+    </div>  
 
     `
     return div
-
 }
 
 export default taskTemplate

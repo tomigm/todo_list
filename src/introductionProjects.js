@@ -9,7 +9,8 @@ const intro = (() => {
 
         }
         else { 
-            pubsub.publish( 'projectAdded', JSON.parse(localStorage.getItem('projectList')))
+            let LSArray = JSON.parse(localStorage.getItem('projectList'));
+            LSArray.forEach(project => pubsub.publish ( 'projectAdded' , project));
         }
     }
     

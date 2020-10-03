@@ -15,17 +15,18 @@ helpBtn.addEventListener('click', function() {next(0)});
 nextHelpBtn.addEventListener('click', function() {next(1)});
 
 /*FEATURE DISCOVERY BLOCK*/
- 
+
 projectsForm.submit();
 projects.listen();
 tasksForm.submit();
 tasks.listen();
 editTaskForm.listen();
+getData.listen();
 intro.init();
 
 
 //setInterval(projects.getList, 5000);
-getData.listen();
+//getData.listen();
 M.AutoInit(); // 1 solucion es agregar esto al final de cada render
 
 //TODO AGREGAR LOCALSTORAGE

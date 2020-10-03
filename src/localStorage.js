@@ -1,19 +1,35 @@
 import pubsub from './pubsub';
 
 const getData = (() => {
-
+    let dataList = [];
     const listen = () => {
        
       pubsub.subscribe('updatedList', addData);
       
     }
 
+    const Jstring = data => {
+        
+        let obj;
+          for (let i = 0; i < data.length ; i++) {
+            obj = JSON.stringify(data[i]);
+            dataList.push(obj);
+          }
+          
+          
+          return dataList
+    }
+
     const addData = (data) => {
         console.log('current data');
         console.log(data);
 
-       /* let storedList = localStorage.getItem('projectList')
-        if */
+        
+
+        localStorage.setItem('projectList', Jstring(data) )
+        
+
+        
     }
 /*
     const addData = data => {

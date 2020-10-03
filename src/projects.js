@@ -56,6 +56,7 @@ const projects = (() => {
         let elem = current.querySelector('.tooltipped');
             let instance = M.Tooltip.init(elem)
             instance.destroy()
+        pubsub.publish('updatedList', list)
         console.log(list)   
     }
 
@@ -73,10 +74,25 @@ const projects = (() => {
         //console.log (currentTasks.tasks)   
     }
 
-    const updateCounter = (data) => {
+    const updateCounter = (data) => {    
+        // data contains an array of the active tasks [{}, {}, {}]   
+        
+        // Selects active project, gets name, and updates task list
+        let activeProj = document.querySelector(".collection-item.active");
+        let name = activeProj.closest(".row").getAttribute('project-name');    
+        let currentTasks = list.find(project => (project.projectName === name))
+        currentTasks.tasks = data;
+
+        pubsub.publish('updatedList', list)
+
+
+        console.log('a ver si te arreglas')
+        console.log(list)
+
         let active = document.querySelector(".active > span.badge");   
             active.innerHTML = `${data.length}`;
-            pubsub.publish('updatedList', list);
+        
+        
     }
 
     return { listen, render, list, deleteProject, updateCounter, getList }

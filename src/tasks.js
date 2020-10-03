@@ -39,7 +39,7 @@ const tasks = (() => {
         let currentTaskList = data.tasks;
         // update taskList with selected project tasks
         list = [];
-        list = currentTaskList;
+        list = currentTaskList; 
         // Clears tasks from task module    
         clearTasks(taskList);
         // for each task inside .tasks, it renders to the DOM
@@ -54,7 +54,7 @@ const tasks = (() => {
         // makes list public
             pubsub.publish('updatedTaskList', list);
         //renders to DOM        
-            return render(data);
+            render(data);
     }
 
     const deleteTask = (event) => {
@@ -63,10 +63,12 @@ const tasks = (() => {
         let name = current.getAttribute('task-name')    
         //makes a new list with all the projects EXCEPT the one clicked that matches projectName
         list = list.filter(task => task.taskName !== name ) ;
-        // publishes globally the new updated list without the deleted project
-        pubsub.publish('updatedTaskList', list);
-        // removes parent from DOM
+       
+        // removes parent from DOM        
         taskList.removeChild(current);
+         // publishes globally the new updated list without the deleted project
+         pubsub.publish('updatedTaskList', list);
+        console.log ( 'la list de los tasks ')
         console.log(list)  
     }
 
@@ -77,6 +79,8 @@ const tasks = (() => {
         // filters element from list
         let currentElement = list.filter(task => task.taskName === name); 
         //*const editTaskModal = document.getElementById('editTaskModal');
+        console.log('editando');
+        console.log(currentElement[0]);
         // makes selected element array from "list" public >> being listened by editTaskForm.js
         pubsub.publish('currentTaskValues', currentElement[0]);
         // makes a new list without the edited element && removes from DOM

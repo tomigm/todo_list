@@ -14,16 +14,12 @@ const intro = (() => {
         }
 
         openProject();
-
     }
 
     const openProject = () => {
-        const projectList = document.getElementById('projects')
-        
+        const projectList = document.getElementById('projects')        
         if(projectList.children.length > 0){  
-                
         let firstProject = projectList.firstElementChild;
-        console.log(firstProject);  
         firstProject.children[0].click(); 
         } return
     }

@@ -5,10 +5,6 @@ const projects = (() => {
     // Creates empty projects list
     let list = [];
     
-    const getList = () => {
-        console.log(list);
-    }
-    
     // Selects project list
     const projectList = document.getElementById('projects')
         // Makes projects to start listening
@@ -36,9 +32,7 @@ const projects = (() => {
         if (list.find(project => (project.projectName === data.projectName))) {return alert('Project exists')};
         if (data.projectName == '') {return alert('Assign a name to the project')}
         list.push(data);
-        console.log (list); 
-        pubsub.publish('updatedList', list);
-        
+        pubsub.publish('updatedList', list);        
         render(data);
         
     }
@@ -50,14 +44,13 @@ const projects = (() => {
         //makes a new list with all the projects EXCEPT the one clicked that matches projectName
         list = list.filter(project => project.projectName !== name ) ;
         // publishes globally the new updated list without the deleted project
-        pubsub.publish('projectDeleted', list);
+        pubsub.publish('projectDeleted');
         // removes parent from DOM
         projectList.removeChild(current);
         let elem = current.querySelector('.tooltipped');
             let instance = M.Tooltip.init(elem)
             instance.destroy()
-        pubsub.publish('updatedList', list)
-        console.log(list)   
+        pubsub.publish('updatedList', list)  
     }
 
     const openTasks = (event) => {
@@ -67,15 +60,12 @@ const projects = (() => {
         toggleActive.classList.add("active")
         let current = event.target.closest(".row");    
         let name = current.getAttribute('project-name');
-        //console.log(name);   
         let currentTasks = list.find(project => (project.projectName === name))
-
         pubsub.publish('taskOpened', currentTasks)
-        //console.log (currentTasks.tasks)   
     }
 
     const updateCounter = (data) => {    
-        // data contains an array of the active tasks [{}, {}, {}]   
+        //* data contains an array of the active tasks [{}, {}, {}]   
         
         // Selects active project, gets name, and updates task list
         let activeProj = document.querySelector(".collection-item.active");
@@ -85,17 +75,11 @@ const projects = (() => {
 
         pubsub.publish('updatedList', list)
 
-
-        console.log('a ver si te arreglas')
-        console.log(list)
-
         let active = document.querySelector(".active > span.badge");   
-            active.innerHTML = `${data.length}`;
-        
-        
+            active.innerHTML = `${data.length}`;      
     }
 
-    return { listen, render, list, deleteProject, updateCounter, getList }
+    return { listen, render, list, deleteProject, updateCounter }
 
 })();
 

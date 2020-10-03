@@ -9,14 +9,15 @@ const tasks = (() => {
         pubsub.subscribe('taskOpened', renderCurrent);
         pubsub.subscribe('taskAdded', add);
         pubsub.subscribe('taskUpdated', editTask);
+        pubsub.subscribe('projectDeleted', clearTasks)
     }
 
-    const clearTasks = (tasks) => {
+    const clearTasks = () => {
         // check if taskList has childs
         //if yes > while taskList have childs, remove childs
-    if(tasks.hasChildNodes()) {     
-        while (tasks.hasChildNodes()) {
-        tasks.removeChild(tasks.lastChild);
+    if(taskList.hasChildNodes()) {     
+        while (taskList.hasChildNodes()) {
+            taskList.removeChild(taskList.lastChild);
         }
     }
     else {return}  
@@ -34,14 +35,15 @@ const tasks = (() => {
 
     const renderCurrent = (data) => {    
         //console.log('test');
-        console.log(data);
+        if(data == undefined){return}
         // grabs tasks from selected project
         let currentTaskList = data.tasks;
+        
         // update taskList with selected project tasks
         list = [];
         list = currentTaskList; 
         // Clears tasks from task module    
-        clearTasks(taskList);
+        clearTasks();
         // for each task inside .tasks, it renders to the DOM
         currentTaskList.forEach(task => render(task));
     }
@@ -63,13 +65,10 @@ const tasks = (() => {
         let name = current.getAttribute('task-name')    
         //makes a new list with all the projects EXCEPT the one clicked that matches projectName
         list = list.filter(task => task.taskName !== name ) ;
-       
         // removes parent from DOM        
         taskList.removeChild(current);
          // publishes globally the new updated list without the deleted project
          pubsub.publish('updatedTaskList', list);
-        console.log ( 'la list de los tasks ')
-        console.log(list)  
     }
 
     const listenEdit = (event) => {
@@ -79,8 +78,6 @@ const tasks = (() => {
         // filters element from list
         let currentElement = list.filter(task => task.taskName === name); 
         //*const editTaskModal = document.getElementById('editTaskModal');
-        console.log('editando');
-        console.log(currentElement[0]);
         // makes selected element array from "list" public >> being listened by editTaskForm.js
         pubsub.publish('currentTaskValues', currentElement[0]);
         // makes a new list without the edited element && removes from DOM

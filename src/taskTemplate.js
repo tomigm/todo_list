@@ -13,7 +13,7 @@ const taskTemplate = (name, description, dueDate, priority) => {
              <a class ="dueDate">${dueDate}</a>
              <a class="priority">${priority}</a>
              <label>
-                <input type="checkbox" class="filled-in" checked="checked">
+                <input type="checkbox" class="filled-in">
                 <span>Mark as done</span>
               </label>       
           <div class="card-action">

@@ -63,7 +63,7 @@
 .taskList {
     overflow: scroll;
     background: url(../images/wave.svg) no-repeat ;
-    background-size: containr;
+    background-size: contain;
     background-position: bottom;
 }
 
@@ -142,8 +142,18 @@
     display: none;
 }
 
+
+.modal {
+    max-height: 100%;
+}
+
 @media only screen and (max-width: 600px) {
     .projectList.collection {
-      height: 50%;;
+      height: 50%;
+      box-shadow: 0 18px 84px -15px black;
     }
-  }
+    .taskList {        
+        background-size: cover;
+    }
+
+}

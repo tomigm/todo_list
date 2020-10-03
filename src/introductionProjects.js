@@ -12,6 +12,20 @@ const intro = (() => {
             let LSArray = JSON.parse(localStorage.getItem('projectList'));
             LSArray.forEach(project => pubsub.publish ( 'projectAdded' , project));
         }
+
+        openProject();
+
+    }
+
+    const openProject = () => {
+        const projectList = document.getElementById('projects')
+        
+        if(projectList.children.length > 0){  
+                
+        let firstProject = projectList.firstElementChild;
+        console.log(firstProject);  
+        firstProject.children[0].click(); 
+        } return
     }
     
     return { init }
